@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메인 페이지</title>
 </head>
 <body>
 
@@ -22,11 +22,11 @@
 				<th colspan="2">회원 추가</th>
 			</tr>
 			<tr>
-				<td>이름</td>
-				<td><input type="text" name="name"></td>
+				<td>회원 이름</td>
+				<td><input type="text" name="name" width="40px"></td>
 			</tr>
 			<tr>
-				<td>점수</td>
+				<td>회원 점수</td>
 				<td><input type="number" min="0" name="score" width="40px"></td>
 			</tr>
 			<tr>
@@ -71,15 +71,24 @@
 	</form>
 
 
-	<h2>회원 목록</h2>
-	
+			<table border="2">
+			<tr>
+				<th width="215px">회원 목록</th>
+			</tr>
 	<%
+		if(model.selectAll(vo).size() != 0){
 		for (MemberVO mv : model.selectAll(vo)) {
 	%>
-			<a href="select.jsp?mpk=<%=mv.getMpk() %>"><%= mv.getMpk() %> <%=mv.getName() %></a></br>
+				<tr>
+					<th><a href="select.jsp?mpk=<%=mv.getMpk() %>"><%= mv.getMpk() %> <%=mv.getName() %></a></th>				
+				</tr>
 	<%	
 		}
+		}else{
+			out.println("<TR><TH>데이터가 없습니다.</TH></TR>");
+		}
 	%>
+			</table>
 
 </body>
 </html>
